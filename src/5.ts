@@ -1,5 +1,5 @@
 
-function longestPalindrome(s) {
+function longestPalindrome(s: string) {
     let max = 0
     let start = -1
     for (let i = 0; i < s.length; i++) {
