@@ -17,7 +17,4 @@ function letterCombinations(digits: string): string[] {
     function backTraking() {
 
     }
-
-    for (let i = 0; i < map[9].length ) { }
-
 };

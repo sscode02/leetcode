@@ -3,6 +3,8 @@
 // function main（）入口函数请勿修改，以防执行失败
 
 const __ = Symbol('PLACEHOLDER');
+// 是一个symbol 对象
+
 
 function placeholder(fn: (...args: any[]) => any, ...bound: any[]): (...args: any[]) => any {
     // show me your code
