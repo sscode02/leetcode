@@ -13,7 +13,7 @@
 // getName()
 
 function foo() {
-    console.log(...arguments)
+    console.log()
     console.log(this.name)
 }
 
@@ -25,4 +25,4 @@ Function.prototype.mybind = function (context, ...arg) {
     }
 }
 
-foo.mybind({ name: 1 }, 3, 4, 5, 6).mybind({ name: 2 }, 7, 8, 9)()
+foo.mybind({ name: 1 }).mybind({ name: 2 })()
