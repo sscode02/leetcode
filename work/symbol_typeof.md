@@ -46,5 +46,6 @@
      }
 
     const symbols =  Object.hasOwnPropertySymbols(obj)
-    
-    symbols 是一个数组
+    symbols 是一个数组 
+    symbols[0] = Symbol('test')
+     
