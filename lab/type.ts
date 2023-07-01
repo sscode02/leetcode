@@ -14,4 +14,4 @@ a1({ name: '1' })
 
 const c = { name: '1', age: 3 }
 
-a1(c)
+export { }
