@@ -18,6 +18,9 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
+  "ts-node": {
+    "esm": true
+  },
   "include": [
     "lettcode"
   ]

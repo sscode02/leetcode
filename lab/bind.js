@@ -9,7 +9,6 @@ const a = test.work
 
 
 function fakeBind(context, ...bound) {
-    debugger
     const fn = this
     const handler = function (...bound2) {
         console.log(bound2)
