@@ -1,27 +1,30 @@
 import { reactive } from '../reactivity/reactiv'
 import { effactWatch } from '../reactivity/effactWatch'
-import { mountVnode } from './mountVnode'
-import { updateVnode } from './updateVnode'
+import { patch } from './patch/patch'
+import { unMountElement } from './patch/unMountElement'
 
 function createApp(componment) {
     const data = reactive(componment.data())
     //@ts-expect-error
     window.state = data
-    let oldVnode: Record<string, any>
+
     const app = {
         mount(continter) {
             const rootElement: Element = document.querySelector(continter)
             effactWatch(() => {
                 rootElement.innerHTML = ''
                 const newVnode = componment.render(data)
-
-                if (!oldVnode) {
-                    mountVnode(newVnode, rootElement)
+                if (newVnode) {
+                    //@ts-expect-error
+                    patch(rootElement._vnode, newVnode, rootElement)
                 } else {
-                    updateVnode(oldVnode, newVnode)
+                    if (continter._vnode) {
+                        unMountElement(rootElement)
+                    }
                 }
 
-                oldVnode = newVnode
+                //@ts-expect-error
+                rootElement._vnode = newVnode
             })
         }
     }
@@ -31,4 +34,3 @@ function createApp(componment) {
 export {
     createApp
 }
-
