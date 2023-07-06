@@ -4,25 +4,13 @@
 
 <body>
     <div id="app"></div>
-    <div id="div" style="border: blue 1px solid;">
-        22
-        <p id="p" style="border: red 1px solid;">33</p>
-    </div>
+    <button id="btn">clickMe</button>
 </body>
 <script>
-    const divClick = (e) => {
-        console.log(2)
-        console.log(e)
+    document.querySelector('#btn').addEventListener('click', clickMe)
+    function clickMe() {
+        window.state.state1++
     }
-    const pClick = (e) => {
-        console.log(1)
-        e.stopPropagation()
-    }
-    const div = document.querySelector('#div')
-    div.addEventListener('click', divClick)
-    const p = document.querySelector('#p')
-    p.addEventListener('click', pClick)
-
 
 
 </script>

@@ -12,8 +12,9 @@ function createApp(componment) {
         mount(continter) {
             const rootElement: Element = document.querySelector(continter)
             effactWatch(() => {
-                rootElement.innerHTML = ''
+                // rootElement.innerHTML = ''
                 const newVnode = componment.render(data)
+
                 if (newVnode) {
                     //@ts-expect-error
                     patch(rootElement._vnode, newVnode, rootElement)
@@ -22,7 +23,6 @@ function createApp(componment) {
                         unMountElement(rootElement)
                     }
                 }
-
                 //@ts-expect-error
                 rootElement._vnode = newVnode
             })
