@@ -1,11 +1,11 @@
 const a = {
-    test: 1,
-    data() { },
-    methods: {
-        get1:
+    get() {
+
     }
 }
 
-
-
-a.methods.get1()
+const b = {
+    get1() {
+        a.get()
+    }
+}
