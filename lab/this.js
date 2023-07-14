@@ -1,17 +1,3 @@
-// console.log(this) // this is undefine
-
-// const obj = {
-//     name: 'ben',
-//     getname() {
-//         console.log(this.name)
-//     }
-// }
-
-// const getName = obj.getname
-
-// obj.getname()
-// getName()
-
 function foo() {
     console.log()
     console.log(this.name)
