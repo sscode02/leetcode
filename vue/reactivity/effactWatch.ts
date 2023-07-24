@@ -1,3 +1,4 @@
+import { scheduler } from "timers/promises"
 
 
 let activeEffact: any
@@ -8,14 +9,22 @@ function effactWatch(effactFn: () => void, options?: Record<any, any>) {
         activeEffact = effact
         calumn(effact)
         effactStack.push(effact)
-        effactFn()
+        const res = effactFn()
         effactStack.pop()
         //activeffact 会一直指向外层effact
         activeEffact = effactStack[effactStack.length - 1]
+        return res
     }
     effact.deps = [] as any[]
     effact.options = options
-    effact()
+
+    if (!options?.lazy) { // 当选项中的lazy 为false 或者空的时候 才立即执行
+        effact()
+    } else {
+        return effact
+    }
+
+
 }
 
 /**
@@ -98,3 +107,44 @@ export {
     trigger,
     effactWatch
 }
+
+let a, b
+
+const component = {
+    computed: {
+        'key': () => {
+            return a + b
+        }
+    }
+}
+
+function computed(fn) {
+    let prevValue
+    let dirty = true
+    const effact = effactWatch(fn, {
+        lazy: true,
+        scheduler() {
+            dirty = true
+            trigger(obj, 'value')
+        }
+    })
+    const obj = {
+        get value() {
+            if (dirty) {
+                //@ts-expect-error
+                prevValue = effact()
+                dirty = false
+                return prevValue
+            }
+
+            track(obj, 'value')
+            return prevValue
+        }
+    }
+    return obj
+}
+
+const res = computed(() => a + b)
+
+
+    .value
